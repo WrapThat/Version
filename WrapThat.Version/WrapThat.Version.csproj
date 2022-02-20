@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Title>Add a Info endpoint that gives out the component version number in etiher text or shields.io format</Title>
+    <Title>Add an Info endpoint that gives out the component version number in etiher text or shields.io format</Title>
     <Authors>Terje Sandstrom</Authors>
     <Copyright>2022 Terje Sandstrom</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

@@ -36,3 +36,10 @@ This is the same as the first method, except that it require authentication, if 
 
 If it is, you will be returned the version string, if not, you will get a 403 response.
 
+```cs
+Route:  /api/info/status
+
+returns
+1.2.3
+```
+
