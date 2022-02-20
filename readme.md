@@ -1,6 +1,10 @@
 # WrapThat.Version
 
-## Usage:
+##: Install
+
+Install from nuget 
+
+## Usage
 
 Add this package to your main ASP.Net project, and it will add an Info endpoint with three methods, giving you the version of the main assembly in semver format.
 
