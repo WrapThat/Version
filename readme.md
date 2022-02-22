@@ -6,7 +6,7 @@ Install from nuget
 
 ## Usage
 
-Add this package to your main ASP.Net project, and it will add an Info endpoint with three methods, giving you the version of the main assembly in semver format.
+Add this package to your main ASP.Net project, and it will add an Info endpoint with five methods, giving you the version of the main assembly in semver format.
 
 ### Get version as a string
 
@@ -17,10 +17,20 @@ returns
 1.2.3
 ```
 
+### Get product version as a string
+
+```cs
+Route:  /api/info/productversion
+
+returns
+1.2.3-rc.1
+```
+
+
 ### Get version as a [shields.io](https://shields.io/) structure
 
 ```cs
-Route:  /api/info
+Route:  /api/info/shields/version
 
 returns shields io structure for use in a [shields endpoint](https://shields.io/endpoint) call.
 
@@ -30,6 +40,24 @@ You call this using shields like:
 
 ```
 https://img.shields.io/endpoint?url=https://yourwebapi/api/info
+```
+
+And you get a lightgrey shields badge back, with label Version and your version number.
+
+
+### Get ProductVersion as a [shields.io](https://shields.io/) structure
+
+```cs
+Route:  /api/info/shields/productversion
+
+returns shields io structure for use in a [shields endpoint](https://shields.io/endpoint) call.
+
+```
+
+You call this using shields like:
+
+```
+https://img.shields.io/endpoint?url=https://yourwebapi/api/info/productversion
 ```
 
 And you get a lightgrey shields badge back, with label Version and your version number.

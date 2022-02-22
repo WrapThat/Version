@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Diagnostics;
+using System.Reflection;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,17 @@ public class InfoController : ControllerBase
     }
 
     [HttpGet]
+    [Route("productversion")]
+    public ActionResult<string> ProductVersion()
+    {
+        var assembly = Assembly.GetEntryAssembly();
+        var fileversioninfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+        return Ok(fileversioninfo.ProductVersion);
+    }
+
+
+
+    [HttpGet]
     [AllowAnonymous]
     public ActionResult<string> Info()
     {
@@ -26,6 +38,24 @@ public class InfoController : ControllerBase
         var shields = new ShieldsIo("Version", version!.ToSemver());
         return Ok(shields);
     }
+
+    [HttpGet]
+    [AllowAnonymous]
+    [Route("shields/version")]
+    public ActionResult<string> InfoShields() => Info();
+    
+
+    [HttpGet]
+    [Route("shields/productversion")]
+    public ActionResult<string> ProductVersionShields()
+    {
+        var assembly= Assembly.GetEntryAssembly();
+        var fileversioninfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+        var shields = new ShieldsIo("Version", fileversioninfo.ProductVersion);
+        return Ok(shields);
+    }
+
+
 
     [HttpGet]
     [Route("status")]
