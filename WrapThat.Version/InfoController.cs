@@ -25,7 +25,8 @@ public class InfoController : ControllerBase
     {
         var assembly = Assembly.GetEntryAssembly();
         var fileversioninfo = FileVersionInfo.GetVersionInfo(assembly.Location);
-        return Ok(fileversioninfo.ProductVersion);
+        var results = fileversioninfo.ProductVersion.Split('+');
+        return Ok(results[0]);
     }
 
 
@@ -51,7 +52,9 @@ public class InfoController : ControllerBase
     {
         var assembly= Assembly.GetEntryAssembly();
         var fileversioninfo = FileVersionInfo.GetVersionInfo(assembly.Location);
-        var shields = new ShieldsIo("Version", fileversioninfo.ProductVersion);
+        var pv = fileversioninfo.ProductVersion;
+        var pvSplit = pv.Split('+');
+        var shields = new ShieldsIo("Version", pvSplit[0]);
         return Ok(shields);
     }
 

@@ -39,6 +39,17 @@ internal class InfoTest
         var result = v.ToSemver();
         Assert.That(result, Is.EqualTo("1.2.3"));
     }
+
+    [Test]
+    public void ProductVersionTest()
+    {
+        var sut = new InfoController();
+        var result = sut.ProductVersion();
+        var res = result.Result;
+        var realResult = res as OkObjectResult;
+        Assert.That(realResult.Value, Does.Not.Contain("+"));
+    }
+
 }
 
 public static class ConvertObjectResult
