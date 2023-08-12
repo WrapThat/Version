@@ -7,6 +7,7 @@ namespace WrapThat.Version;
 
 [Route("api/[controller]")]
 [ApiController]
+[AllowAnonymous]
 [ApiExplorerSettings(GroupName = "v1")]
 public class InfoController : ControllerBase
 {
@@ -20,6 +21,7 @@ public class InfoController : ControllerBase
     }
 
     [HttpGet]
+    [AllowAnonymous]
     [Route("productversion")]
     public ActionResult<string> ProductVersion()
     {
@@ -47,6 +49,7 @@ public class InfoController : ControllerBase
     
 
     [HttpGet]
+    [AllowAnonymous]
     [Route("shields/productversion")]
     public ActionResult<string> ProductVersionShields()
     {
@@ -61,6 +64,7 @@ public class InfoController : ControllerBase
 
 
     [HttpGet]
+    [AllowAnonymous]
     [Route("status")]
     public ActionResult<string> Status()
     {
