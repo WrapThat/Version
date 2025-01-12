@@ -1,57 +1,23 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
-namespace WrapThat.Version
+namespace WrapThat.Version;
+
+public static class WebApplicationExtensions
 {
-    public static class WebApplicationExtensions
+    public static WebApplication MapVersionApiEndpoints(this WebApplication app)
     {
-        public static WebApplication MapVersionApiEndpoints(this WebApplication app)
-        {
-            app.MapGet("/api/info", context => HandleRequest(context, c => c.Info()))
-                .AllowAnonymous();
-            app.MapGet("/api/info/version", context => HandleRequest(context, c => c.Version()))
-                .AllowAnonymous();
-            app.MapGet("/api/info/productversion", context => HandleRequest(context, c => c.ProductVersion()))
-                .AllowAnonymous();
-            app.MapGet("/api/info/shields/version", context => HandleRequest(context, c => c.InfoShields()))
-                .AllowAnonymous();
-            app.MapGet("/api/info/shields/productversion", context => HandleRequest(context, c => c.ProductVersionShields()))
-                .AllowAnonymous();
-            app.MapGet("/api/info/status", context => HandleRequest(context, c => c.Status()))
-                .AllowAnonymous();
-            return app;
-        }
-
-        private static async Task HandleRequest<T>(HttpContext context, Func<InfoController, ActionResult<T>> action)
-        {
-            var controller = new InfoController();
-            var actionResult = action(controller);
-            await WriteResultAsync(context, actionResult);
-        }
-
-        private static async Task WriteResultAsync<T>(HttpContext context, ActionResult<T> actionResult)
-        {
-            if (actionResult.Result is ObjectResult result)
-            {
-                context.Response.StatusCode = (int)result.StatusCode!;
-                await context.Response.WriteAsJsonAsync(result.Value);
-            }
-            else
-            {
-                if (actionResult.Result is StatusCodeResult statusCodeResult)
-                {
-                    context.Response.StatusCode = statusCodeResult.StatusCode;
-                }
-                else if (actionResult.Value != null)
-                {
-                    await context.Response.WriteAsJsonAsync(actionResult.Value);
-                }
-                else
-                {
-                    context.Response.StatusCode = StatusCodes.Status204NoContent;
-                }
-            }
-        }
+        app.MapGet("/api/info", () => new InfoController().Info())
+            .AllowAnonymous();
+        app.MapGet("/api/info/version", () => new InfoController().Version())
+            .AllowAnonymous();
+        app.MapGet("/api/info/productversion", () => new InfoController().ProductVersion())
+            .AllowAnonymous();
+        app.MapGet("/api/info/shields/version", () => new InfoController().InfoShields())
+            .AllowAnonymous();
+        app.MapGet("/api/info/shields/productversion", () => new InfoController().ProductVersionShields())
+            .AllowAnonymous();
+        app.MapGet("/api/info/status", () => new InfoController().Status())
+            .AllowAnonymous();
+        return app;
     }
 }
