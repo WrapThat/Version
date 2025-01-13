@@ -21,9 +21,20 @@
         <MinVerVersionOverride Condition="'$(Version)' == ''">0.0.0</MinVerVersionOverride>
     </PropertyGroup>
 
+    <Target Name="ShowVersion" AfterTargets="AfterBuild">
+        <Message Importance="High" Text="Version: $(Version)" />
+    </Target>
 
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="MinVer" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   
