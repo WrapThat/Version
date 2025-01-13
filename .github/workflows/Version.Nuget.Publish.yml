@@ -1,4 +1,4 @@
-name: WrapThat.TheAnswer.Nuget
+name: Version.Nuget.Publish
 on:
   workflow_dispatch:
     inputs:
