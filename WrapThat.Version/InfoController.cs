@@ -26,13 +26,11 @@ public class InfoController : ControllerBase
     public ActionResult<string> ProductVersion()
     {
         var assembly = Assembly.GetEntryAssembly();
-        var fileversioninfo = FileVersionInfo.GetVersionInfo(assembly.Location);
-        var results = fileversioninfo.ProductVersion.Split('+');
+        var fileversioninfo = FileVersionInfo.GetVersionInfo(assembly!.Location);
+        var results = fileversioninfo.ProductVersion!.Split('+');
         return Ok(results[0]);
     }
-
-
-
+    
     [HttpGet]
     [AllowAnonymous]
     public ActionResult<string> Info()
@@ -54,15 +52,13 @@ public class InfoController : ControllerBase
     public ActionResult<string> ProductVersionShields()
     {
         var assembly= Assembly.GetEntryAssembly();
-        var fileversioninfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+        var fileversioninfo = FileVersionInfo.GetVersionInfo(assembly!.Location);
         var pv = fileversioninfo.ProductVersion;
-        var pvSplit = pv.Split('+');
+        var pvSplit = pv!.Split('+');
         var shields = new ShieldsIo("Version", pvSplit[0]);
         return Ok(shields);
     }
-
-
-
+    
     [HttpGet]
     [AllowAnonymous]
     [Route("status")]
@@ -71,7 +67,7 @@ public class InfoController : ControllerBase
         var version = Assembly.GetEntryAssembly()!.GetName().Version;
         return Ok(version?.ToSemver());
     }
-
+    
 }
 
 public static class VersionExtensions
