@@ -57,7 +57,7 @@ jobs:
                 Write-Host "Publishing $file..."
                 dotnet nuget push $file.FullName --api-key "${{ secrets.WRAPTHATNUGET }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
             } else {
-                Write-Host "Skipping $file (not a valid version for publishing)"
+                Write-Host "Warning: Skipping $file (not a valid version for publishing)"
             }
          }
     
