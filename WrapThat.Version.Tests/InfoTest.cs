@@ -47,7 +47,8 @@ internal class InfoTest
         var result = sut.ProductVersion();
         var res = result.Result;
         var realResult = res as OkObjectResult;
-        Assert.That(realResult.Value, Does.Not.Contain("+"));
+        Assert.That(realResult, Is.Not.Null, "realResult should not be null");
+        Assert.That(realResult!.Value, Does.Not.Contain("+"));
     }
 
 }
