@@ -19,10 +19,10 @@ public static class WebApplicationExtensions
         return app;
     }
 
-    private static ActionResult<string> HandleRequest(Func<InfoController, ActionResult<string>> action)
+    private static object? HandleRequest<T>(Func<InfoController, ActionResult<T>> action)
     {
         var controller = new InfoController();
-        var actionResult = action(controller);
-        return actionResult as ActionResult<string>;
+        var actionResult = action(controller).Result as OkObjectResult;
+        return actionResult!.Value;
     }
 }
